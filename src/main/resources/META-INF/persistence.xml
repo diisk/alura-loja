@@ -10,7 +10,8 @@
             <property name="javax.persistence.jdbc.user" value="root" />
             <property name="javax.persistence.jdbc.password" value="123789" />
             <property name="hibernate.show_sql" value="true" />
-            <property name="hibernate.mysql.auto" value="true" />
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+
         </properties>
     </persistence-unit>
 </persistence>
