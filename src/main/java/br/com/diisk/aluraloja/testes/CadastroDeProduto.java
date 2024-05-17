@@ -2,24 +2,26 @@ package br.com.diisk.aluraloja.testes;
 
 import java.math.BigDecimal;
 
+import br.com.diisk.aluraloja.dao.CategoriaDao;
+import br.com.diisk.aluraloja.dao.ProdutoDao;
+import br.com.diisk.aluraloja.model.Categoria;
 import br.com.diisk.aluraloja.model.Produto;
+import br.com.diisk.aluraloja.util.JPAUtil;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 
 public class CadastroDeProduto {
 
     public static void main(String[] args) {
-        Produto celular = new Produto();
-        celular.setNome("Teste Nome");
-        celular.setDescricao("Teste Desc");
-        celular.setPreco(new BigDecimal("500"));
+        Categoria celulares = new Categoria("Celulares");
+        Produto celular = new Produto("Teste Nome", "Teste Desc", new BigDecimal("500"), celulares);
 
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("alura-loja");
-        EntityManager em = factory.createEntityManager();
+        EntityManager em = JPAUtil.getEntityManager();
+        ProdutoDao produtoDao = new ProdutoDao(em);
+        CategoriaDao categoriaDao = new CategoriaDao(em);
 
         em.getTransaction().begin();
-        em.persist(celular);
+        categoriaDao.cadastrar(celulares);
+        produtoDao.cadastrar(celular);
         em.getTransaction().commit();
         em.close();
     }
