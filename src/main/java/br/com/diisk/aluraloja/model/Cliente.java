@@ -7,22 +7,29 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "categorias")
-public class Categoria {
+@Table(name = "clientes")
+public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String descricao;
+    private String nome;
+    private String cpf;
 
-    public Categoria() {}
+    public Cliente() {}
 
-    public Categoria(String descricao) {
-        this.descricao = descricao;
+    public Cliente(String nome, String cpf) {
+        this.nome = nome;
+        this.cpf = cpf;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getNome() {
+        return nome;
     }
+
+    public String getCpf() {
+        return cpf;
+    }
+    
 
 }

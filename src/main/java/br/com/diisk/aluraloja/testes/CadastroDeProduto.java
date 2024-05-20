@@ -12,6 +12,20 @@ import jakarta.persistence.EntityManager;
 public class CadastroDeProduto {
 
     public static void main(String[] args) {
+        cadastrarProduto();
+        Long id = 1l;
+
+        EntityManager em = JPAUtil.getEntityManager();
+        ProdutoDao produtoDao = new ProdutoDao(em);
+        Produto produto = produtoDao.buscarPorId(id);
+        var todos = produtoDao.buscarPorNomeCategoria("Celulares");
+        todos.forEach(System.out::println);
+        var prod = produtoDao.buscarPrecoProduto("Teste Nome");
+        System.out.println("tst");
+        System.out.println(prod);
+    }
+
+    private static void cadastrarProduto() {
         Categoria celulares = new Categoria("Celulares");
         Produto celular = new Produto("Teste Nome", "Teste Desc", new BigDecimal("500"), celulares);
 
